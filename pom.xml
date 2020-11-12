@@ -11,12 +11,24 @@
     <groupId>io.github.evertoncnsouza</groupId>
     <artifactId>Fatura</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>transacao</name>
+    <name>fatura</name>
     <description>bootcamp</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -57,6 +69,10 @@
             <groupId>io.opentracing.contrib</groupId>
             <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
             <version>3.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
         <dependency>
