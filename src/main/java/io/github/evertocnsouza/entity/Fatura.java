@@ -5,9 +5,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @NamedQuery(name = "findFaturaByCartaoAndData",
@@ -49,7 +51,7 @@ public class Fatura {
     public UUID getId() {
         return id;
     }
-    
+
     public FaturaResponse toResponse() {
         return new FaturaResponse(this.mes, this.ano, Transacao.toResponseSet(transacoes), calcularTotalDaFatura());
     }
@@ -60,4 +62,11 @@ public class Fatura {
     }
 
 
+    public BigDecimal calcularSaldoDoCartao(BigDecimal limite) {
+        return limite.subtract(calcularTotalDaFatura()).setScale(2, RoundingMode.CEILING);
+    }
+
+    public Set<Transacao> retornarUltimasDezTransacoes() {
+        return transacoes.stream().limit(10).collect(Collectors.toSet());
+    }
 }
