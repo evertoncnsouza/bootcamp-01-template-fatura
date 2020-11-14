@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,15 @@ public class FaturaController {
     EntityManager manager;
     
     private final Logger log = LoggerFactory.getLogger(FaturaController.class);
+
+    @GetMapping
+    public HashMap<String, Object> list() {
+        HashMap<String, Object> resultado = new HashMap<>();
+        List CartaoListener = manager.createQuery("select c from Cartao c").getResultList();
+        resultado.put("cartoes", CartaoListener.toString());
+        return resultado;
+    }
+
     
     @GetMapping("/{idCartao}/faturas")
     public ResponseEntity detalhesFaturaCorrente(@PathVariable UUID idCartao){

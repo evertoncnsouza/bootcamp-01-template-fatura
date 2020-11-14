@@ -15,4 +15,12 @@ public class CartaoListener {
     public UUID getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "CartaoListener{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

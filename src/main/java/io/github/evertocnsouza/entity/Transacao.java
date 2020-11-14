@@ -55,8 +55,16 @@ public class Transacao {
         return new TransacaoResponse(this.valor, this.estabelecimento.toResponse(), this.efetivadaEm);
    }
 
-
     public BigDecimal retornarValorDaTransacao() {
         return valor;
+    }
+
+
+    public Integer retornarMesTransacao() {
+        return efetivadaEm.getMonthValue();
+    }
+
+    public Integer retornarAnoTransacao() {
+        return efetivadaEm.getYear();
     }
 }

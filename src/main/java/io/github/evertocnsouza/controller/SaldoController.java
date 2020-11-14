@@ -40,6 +40,7 @@ public class SaldoController {
             log.warn("Cartão de número {} , não foi encontrado", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
         final ResponseEntity<LimiteResponse> response = cartaoIntegracao.consultarlimiteDoCartao(cartao.getNumeroDoCartao());
 
         final SaldoResponse saldo = verificarSaldo.calcularSaldoDisponivel(cartao.getId(), response.getBody().getLimite());

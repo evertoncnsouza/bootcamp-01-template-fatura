@@ -69,4 +69,8 @@ public class Fatura {
     public Set<Transacao> retornarUltimasDezTransacoes() {
         return transacoes.stream().limit(10).collect(Collectors.toSet());
     }
+
+    public void addTransacaoNaFatura(Transacao transacao) {
+        this.transacoes.add(transacao);
+    }
 }
