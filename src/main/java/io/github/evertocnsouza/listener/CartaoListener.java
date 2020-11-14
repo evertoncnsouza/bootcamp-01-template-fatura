@@ -4,7 +4,7 @@ import io.github.evertocnsouza.entity.Cartao;
 
 import java.util.UUID;
 
-public class CartaoResponseListener {
+public class CartaoListener {
 
     private UUID id;
     private String email;

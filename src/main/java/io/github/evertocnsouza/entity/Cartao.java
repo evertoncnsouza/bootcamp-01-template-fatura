@@ -37,4 +37,8 @@ public class Cartao {
     public UUID getId() {
     return id;
     }
+
+    public UUID getNumeroDoCartao() {
+        return numeroDoCartao;
+    }
 }
