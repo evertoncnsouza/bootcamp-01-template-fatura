@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@NamedQuery(name = "findFaturaByCartaoAndData",
+        query = "select f from Fatura f where f.cartao.id = :idCartao and mes = :mes and ano = :ano")
 public class Fatura {
 
     @Id
@@ -47,7 +49,7 @@ public class Fatura {
     public UUID getId() {
         return id;
     }
-
+    
     public FaturaResponse toResponse() {
         return new FaturaResponse(this.mes, this.ano, Transacao.toResponseSet(transacoes), calcularTotalDaFatura());
     }
