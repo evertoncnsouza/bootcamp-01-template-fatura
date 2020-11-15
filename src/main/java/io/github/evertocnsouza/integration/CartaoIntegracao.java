@@ -12,5 +12,4 @@ public interface CartaoIntegracao {
 
     @GetMapping("/api/cartoes/{numeroDoCartao}")
     ResponseEntity<LimiteResponse> consultarlimiteDoCartao(@PathVariable UUID numeroDoCartao);
-
 }

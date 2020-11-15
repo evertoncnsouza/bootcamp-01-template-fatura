@@ -1,6 +1,6 @@
 package io.github.evertocnsouza.config;
 
-import io.github.evertocnsouza.listener.TransacaoListener;
+import io.github.evertocnsouza.listener.EventoDeTransacao;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -32,15 +32,15 @@ public class KafkaConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, TransacaoListener> transactionConsumerFactory() {
+    public ConsumerFactory<String, EventoDeTransacao> transactionConsumerFactory() {
         StringDeserializer stringDeserializer = new StringDeserializer();
-        JsonDeserializer<TransacaoListener> jsonDeserializer = new JsonDeserializer<>(TransacaoListener.class, false);
+        JsonDeserializer<EventoDeTransacao> jsonDeserializer = new JsonDeserializer<>(EventoDeTransacao.class, false);
         return new DefaultKafkaConsumerFactory<>(consumerConfigurations(), stringDeserializer, jsonDeserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, TransacaoListener> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, TransacaoListener> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(transactionConsumerFactory());
         return factory;
     }

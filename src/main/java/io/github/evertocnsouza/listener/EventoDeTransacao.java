@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class TransacaoListener {
+public class EventoDeTransacao {
 
     private UUID id;
     private BigDecimal valor;

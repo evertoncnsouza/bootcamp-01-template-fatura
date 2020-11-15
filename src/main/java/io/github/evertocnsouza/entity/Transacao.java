@@ -59,12 +59,22 @@ public class Transacao {
         return valor;
     }
 
-
     public Integer retornarMesTransacao() {
         return efetivadaEm.getMonthValue();
     }
 
     public Integer retornarAnoTransacao() {
         return efetivadaEm.getYear();
+    }
+
+    @Override
+    public String toString() {
+        return "Transacao{" +
+                "id=" + id +
+                ", idTransacao=" + idTransacao +
+                ", valor=" + valor +
+                ", estabelecimento=" + estabelecimento +
+                ", efetivadaEm=" + efetivadaEm +
+                '}';
     }
 }

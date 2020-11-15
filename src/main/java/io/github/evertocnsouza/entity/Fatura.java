@@ -48,8 +48,13 @@ public class Fatura {
         this.cartao = cartao;
     }
 
+
     public UUID getId() {
         return id;
+    }
+
+    public UUID retornarNumeroDoCartao(){
+        return cartao.getNumeroDoCartao();
     }
 
     public FaturaResponse toResponse() {
@@ -72,5 +77,16 @@ public class Fatura {
 
     public void addTransacaoNaFatura(Transacao transacao) {
         this.transacoes.add(transacao);
+    }
+
+    @Override
+    public String toString() {
+        return "Fatura{" +
+                "id=" + id +
+                ", mes=" + mes +
+                ", ano=" + ano +
+                ", transacoes=" + transacoes +
+                ", cartao=" + cartao +
+                '}';
     }
 }

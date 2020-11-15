@@ -4,9 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.UUID;
 
 @Entity
@@ -24,14 +22,21 @@ public class Cartao {
     @Email
     private String email;
 
+    @NotNull
+    @Min(1)
+    @Max(31)
+    private Integer diaDeVencimentoDasFaturas;
+
     @Deprecated
     public Cartao() {
 
     }
 
-    public Cartao(@NotNull UUID numeroDoCartao, @NotBlank @Email String email) {
+    public Cartao(@NotNull UUID numeroDoCartao,
+                  @NotBlank @Email String email) {
         this.numeroDoCartao = numeroDoCartao;
         this.email = email;
+        this.diaDeVencimentoDasFaturas = 10;
     }
 
     public UUID getId() {
@@ -40,5 +45,14 @@ public class Cartao {
 
     public UUID getNumeroDoCartao() {
         return numeroDoCartao;
+    }
+
+    @Override
+    public String toString() {
+        return "Cartao{" +
+                "id=" + id +
+                ", numeroDoCartao=" + numeroDoCartao +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

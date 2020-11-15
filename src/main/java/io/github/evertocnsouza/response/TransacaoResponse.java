@@ -14,4 +14,16 @@ public class TransacaoResponse {
         this.estabelecimento = estabelecimento;
         this.efetivadaEm = efetivadaEm;
     }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public EstabelecimentoResponse getEstabelecimento() {
+        return estabelecimento;
+    }
+
+    public LocalDateTime getEfetivadaEm() {
+        return efetivadaEm;
+    }
 }

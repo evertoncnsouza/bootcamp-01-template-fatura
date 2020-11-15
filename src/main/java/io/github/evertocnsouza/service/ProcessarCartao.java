@@ -34,7 +34,9 @@ public class ProcessarCartao {
             return cartao;
         }
 
+        log.info("Respondendo o cartão encontrado");
         cartao = respostaCartao.get(0);
+        System.out.println(cartao);
         return cartao;
     }
 
