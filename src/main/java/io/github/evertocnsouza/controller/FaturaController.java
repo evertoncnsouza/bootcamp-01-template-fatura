@@ -18,6 +18,7 @@ import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -57,8 +58,8 @@ public class FaturaController {
         log.info("Solicitação de detalhes da fatura do cartão: {}",
                 idCartao);
 
-        Cartao cartao = manager.find(Cartao.class, idCartao);
-        if (cartao==null){
+        final Optional<Cartao> cartao = Optional.ofNullable(manager.find(Cartao.class, idCartao));
+        if (cartao.isEmpty()){
             log.warn("Cartão de número {} , não foi encontrado", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

@@ -13,4 +13,11 @@ public class LimiteResponse {
     public void setLimite(BigDecimal limite) {
         this.limite = limite;
     }
+
+    @Override
+    public String toString() {
+        return "LimiteResponse{" +
+                "limite=" + limite +
+                '}';
+    }
 }

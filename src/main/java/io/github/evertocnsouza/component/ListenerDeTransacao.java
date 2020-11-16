@@ -24,6 +24,7 @@ public class ListenerDeTransacao {
     @Autowired
     ProcessarCartao processarCartao;
 
+    @Autowired
     private FaturaService faturaService;
 
     private final Logger log = LoggerFactory.getLogger(EventoDeTransacao.class);
@@ -48,7 +49,9 @@ public class ListenerDeTransacao {
         System.out.println(fatura.toString());
         
         fatura.addTransacaoNaFatura(transacao);
+        log.info("Adicionou a fatura na transacao?");
         manager.merge(fatura);
+        log.info("Sim, adicionou");
 
     }
 }

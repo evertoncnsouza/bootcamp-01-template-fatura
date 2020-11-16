@@ -20,4 +20,13 @@ public class SaldoResponse {
     public Set<TransacaoResponse> getTransacoes() {
         return transacoes;
     }
+
+    @Override
+    public String toString() {
+        return "SaldoResponse{" +
+                "saldo=" + saldo +
+                ", transacoes=" + transacoes +
+                '}';
+    }
 }
+

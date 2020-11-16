@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -35,11 +36,17 @@ public class SaldoController {
     @GetMapping("/{idCartao}/saldo")
     public ResponseEntity consultarSaldo(@PathVariable UUID idCartao){
         log.info("Consultando saldo do cartão");
-        Cartao cartao = manager.find(Cartao.class, idCartao);
-        if (cartao==null){
+        System.out.println(verificarSaldo.toString());
+        final Optional<Cartao> cartaoProcurado = Optional.ofNullable(manager.find(Cartao.class, idCartao));
+
+        log.info("Encontrou cartao? Cartao de numero {}, encontrado", cartaoProcurado);
+
+        if(cartaoProcurado.isEmpty()){
             log.warn("Cartão de número {} , não foi encontrado", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
+        Cartao cartao = cartaoProcurado.get();
 
         final ResponseEntity<LimiteResponse> response = cartaoIntegracao.consultarlimiteDoCartao(cartao.getNumeroDoCartao());
 
