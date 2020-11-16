@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -36,21 +35,21 @@ public class SaldoController {
     @GetMapping("/{idCartao}/saldo")
     public ResponseEntity consultarSaldo(@PathVariable UUID idCartao){
         log.info("Consultando saldo do cartão");
-        System.out.println(verificarSaldo.toString());
-        final Optional<Cartao> cartaoProcurado = Optional.ofNullable(manager.find(Cartao.class, idCartao));
+
+        Cartao cartaoProcurado = manager.find(Cartao.class, idCartao);
 
         log.info("Encontrou cartao? Cartao de numero {}, encontrado", cartaoProcurado);
 
-        if(cartaoProcurado.isEmpty()){
+        if(cartaoProcurado==null){
             log.warn("Cartão de número {} , não foi encontrado", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        Cartao cartao = cartaoProcurado.get();
+        ResponseEntity<LimiteResponse> response = cartaoIntegracao.consultarlimiteDoCartao(cartaoProcurado.getNumeroDoCartao());
+        System.out.println(response);
+        System.out.println(consultarSaldo(cartaoProcurado.getNumeroDoCartao()));
 
-        final ResponseEntity<LimiteResponse> response = cartaoIntegracao.consultarlimiteDoCartao(cartao.getNumeroDoCartao());
-
-        final SaldoResponse saldo = verificarSaldo.calcularSaldoDisponivel(cartao.getId(), response.getBody().getLimite());
+        SaldoResponse saldo = verificarSaldo.calcularSaldoDisponivel(cartaoProcurado.getId(), response.getBody().getLimite());
         return ResponseEntity.ok(saldo);
     }
 }

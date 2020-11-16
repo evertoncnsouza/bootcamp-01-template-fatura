@@ -1,6 +1,6 @@
 package io.github.evertocnsouza.entity;
 
-import io.github.evertocnsouza.enums.StatusParcelamento;
+import io.github.evertocnsouza.enums.StatusDaRenegociacao;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-public class ParcelamentoDeFatura {
+public class RenegociacaoFatura {
 
     @Id
     @GeneratedValue(generator = "uuid4")
@@ -28,17 +28,17 @@ public class ParcelamentoDeFatura {
     private Fatura fatura;
 
     @Enumerated(EnumType.STRING)
-    private StatusParcelamento statusParcelamento;
+    private StatusDaRenegociacao statusDaRenegociacao;
 
     @Deprecated
-    public ParcelamentoDeFatura() {
+    public RenegociacaoFatura() {
     }
 
-    public ParcelamentoDeFatura(@NotNull @Positive Integer parcelas,
-                                @NotNull @Positive BigDecimal valorDaParcela) {
+    public RenegociacaoFatura(@NotNull @Positive Integer parcelas,
+                              @NotNull @Positive BigDecimal valorDaParcela) {
         this.parcelas = parcelas;
         this.valorDaParcela = valorDaParcela;
-        this.statusParcelamento = statusParcelamento.PENDENTE;
+        this.statusDaRenegociacao = statusDaRenegociacao.PENDENTE;
     }
 
     public UUID getId() {
@@ -57,11 +57,15 @@ public class ParcelamentoDeFatura {
         return fatura;
     }
 
-    public void mudarStatusDoParcelamento(StatusParcelamento resultado) {
-        this.statusParcelamento = resultado;
+    public StatusDaRenegociacao getStatusDaRenegociacao() {
+        return statusDaRenegociacao;
     }
 
-    public void relacionarFaturaAoParcelamento(Fatura fatura) {
+    public void mudarStatusDaRenegociacao(StatusDaRenegociacao resultado) {
+        this.statusDaRenegociacao = statusDaRenegociacao;
+    }
+
+    public void associarFaturaComRenegociacao(Fatura fatura) {
         this.fatura = fatura;
     }
 }

@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -88,5 +89,18 @@ public class Fatura {
                 ", transacoes=" + transacoes +
                 ", cartao=" + cartao +
                 '}';
+    }
+
+    public boolean verificarCartaoPertenceAFatura(UUID idCartao) {
+        return this.cartao.getId().equals(idCartao);
+    }
+
+    public boolean verificarSeFaturaEDoMesCorrente() {
+        return this.mes.equals(LocalDate.now().getMonthValue());
+    }
+
+    public boolean verificarSeCartaoPertenceAFatura(UUID idCartao) {
+        return this.cartao.getId().equals(idCartao);
+
     }
 }

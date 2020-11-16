@@ -58,8 +58,8 @@ public class FaturaController {
         log.info("Solicitação de detalhes da fatura do cartão: {}",
                 idCartao);
 
-        final Optional<Cartao> cartao = Optional.ofNullable(manager.find(Cartao.class, idCartao));
-        if (cartao.isEmpty()){
+        Cartao cartao = manager.find(Cartao.class, idCartao);
+        if (cartao==null){
             log.warn("Cartão de número {} , não foi encontrado", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
