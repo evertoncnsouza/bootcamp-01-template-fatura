@@ -20,10 +20,10 @@ public class VerificarSaldo {
     @PersistenceContext
     EntityManager manager;
 
-    private final Logger log = LoggerFactory.getLogger(ProcessarCartao.class);
+    private Logger log = LoggerFactory.getLogger(ProcessarCartao.class);
 
     public SaldoResponse calcularSaldoDisponivel(UUID idCartao, BigDecimal limite) {
-        final List<Fatura> faturas = manager.createNamedQuery("findFaturaByCartaoAndData", Fatura.class)
+        List<Fatura> faturas = manager.createNamedQuery("findFaturaByCartaoAndData", Fatura.class)
                 .setParameter("idCartao", idCartao)
                 .setParameter("mes", LocalDate.now().getMonthValue())
                 .setParameter("ano", LocalDate.now().getYear())
