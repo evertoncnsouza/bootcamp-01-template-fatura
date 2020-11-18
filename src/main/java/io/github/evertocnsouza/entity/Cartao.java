@@ -55,4 +55,8 @@ public class Cartao {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    public void alterarVencimentoFatura(Integer dia) {
+        this.diaDeVencimentoDasFaturas = dia;
+    }
 }
