@@ -39,12 +39,12 @@ public class RenegociarFaturaController {
 
 
         if(faturaProcurada==null){
-            log.warn("[RENEGOCIAÇÃO DE FATURA] Fatura não encontrada, Id: {}", idFatura);
+            log.warn("Fatura não encontrada, Id: {}", idFatura);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         if(!faturaProcurada.verificarSeCartaoPertenceAFatura(idCartao)) {
-            log.warn("[RENEGOCIAÇÃO DE FATURA] Fatura não pertence ao cartão, cartão: {}", idFatura);
+            log.warn("Fatura não pertence ao cartão, cartão: {}", idFatura);
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
